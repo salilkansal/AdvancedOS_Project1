@@ -9,7 +9,7 @@ class Constants{
     public Constants() {
         try {
             Properties properties = new Properties();
-            InputStream inputStream = new FileInputStream("config.properties");
+            InputStream inputStream = new FileInputStream("configuration/config.properties");
             properties.load(inputStream);
             this.upperBound = Integer.parseInt(properties.getProperty("upperbound"));
         }
