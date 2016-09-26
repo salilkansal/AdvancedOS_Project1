@@ -12,7 +12,7 @@
 #
 # Format is:
 # Identifier	Hostname	Port
-	0			dc04.utdallas.edu		3332
+	0			dc01.utdallas.edu		3332
 	1			dc33.utdallas.edu		5678
 	2			dc21.utdallas.edu		5231
 	3			dc33.utdallas.edu		2311
