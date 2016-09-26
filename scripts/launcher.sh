@@ -30,7 +30,7 @@ cat ${CONFIG} | sed -e "s/#.*//" | sed -e "/^\s*$/d" |
     	read line
     	host=$( echo $line | awk '{ print $2 }' )
         port=$( echo $line | awk '{ print $3 }' )
-        ssh $netid@$host java $BINDIR/$PROG $i $port &
+        ssh -o StrictHostKeyChecking=no $netid@$host java $BINDIR/$PROG $i $port &
 	done
    
 )
