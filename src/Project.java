@@ -1,8 +1,7 @@
-package AOSProject.bin;
 import java.util.HashMap;
 
 
-public class Project {
+class Project {
 
     public static void main(String[] args) {
         try {
@@ -12,16 +11,19 @@ public class Project {
             MyNode myNode = new MyNode(identifier, portNumber);
 
 
+            //noinspection ConstantConditions
             Thread.sleep(Integer.parseInt(ConfigParser.getStringValue("sleep_time")));
             // read config file and create HashMap<Identifier, GeneralNode>
-            HashMap<Integer, GeneralNode> nodesHashMap = Helper.readConfigurationFile();
+            HashMap<Integer, GeneralNode> nodesHashMap = Helper.getNodesHashMap();
             //start the receiveToken thread
             System.out.println(myNode.identifier + ": Node Starting");
+            //noinspection ConstantConditions
             Thread.sleep(Integer.parseInt(ConfigParser.getStringValue("sleep_time")));
             AcceptConnectionThread acceptConnectionThread = new AcceptConnectionThread(myNode, nodesHashMap);
             acceptConnectionThread.start();
 
             //wait for some time
+            //noinspection ConstantConditions
             Thread.sleep(Integer.parseInt(ConfigParser.getStringValue("wait_time")));
             SendFirstTokenThread sendFirstTokenThread = new SendFirstTokenThread(myNode, nodesHashMap);
             sendFirstTokenThread.start();

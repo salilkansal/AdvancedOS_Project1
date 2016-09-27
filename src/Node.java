@@ -1,12 +1,10 @@
-package AOSProject.bin;
-
 import java.util.Random;
 
 class Node {
     int identifier;
     int portNumber;
 
-    public Node(int identifier, int portNumber) {
+    Node(int identifier, int portNumber) {
         this.identifier = identifier;
         this.portNumber = portNumber;
     }
@@ -21,10 +19,10 @@ class MyNode extends Node{
         this.label = generateLabel();
     }
 
-    public int generateLabel() {
+    private int generateLabel() {
         Random random = new Random();
+        //noinspection ConstantConditions
         return random.nextInt(Integer.parseInt(ConfigParser.getStringValue("upperbound")) +1);
-
     }
 
     @Override
@@ -45,10 +43,6 @@ class GeneralNode extends Node{
         super(identifier, portNumber);
         this.hostname = hostname;
         isCompleted = false;
-    }
-
-    public void setCompleted(){
-        isCompleted = true;
     }
 
     @Override

@@ -1,16 +1,14 @@
-package AOSProject.bin;
-
 import java.util.HashMap;
 
 /**
- * Created by salilkansal on 9/25/16.
+ *The thread which will send the first token of the identifier
  */
 class SendFirstTokenThread extends Thread {
-    MyNode myNode;
-    HashMap<Integer, GeneralNode> nodesHashMap;
-    Token token;
+    private MyNode myNode;
+    private HashMap<Integer, GeneralNode> nodesHashMap;
+    private Token token;
 
-    public SendFirstTokenThread(MyNode myNode, HashMap<Integer, GeneralNode> nodesHashMap) {
+    SendFirstTokenThread(MyNode myNode, HashMap<Integer, GeneralNode> nodesHashMap) {
         super("SendFirstTokenThread");
         this.myNode = myNode;
         this.nodesHashMap = nodesHashMap;

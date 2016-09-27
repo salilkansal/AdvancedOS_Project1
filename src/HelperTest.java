@@ -1,13 +1,6 @@
-package AOSProject.bin;
-
 import org.junit.Test;
 
-import java.io.FileInputStream;
-import java.util.Enumeration;
 import java.util.HashMap;
-import java.util.Properties;
-
-import static org.junit.Assert.*;
 
 
 public class HelperTest {
@@ -20,27 +13,24 @@ public class HelperTest {
 
     @Test
     public void readConfigurationFileTest() throws Exception {
-        System.out.println(Helper.readConfigurationFile());
+        System.out.println(Helper.getNodesHashMap());
     }
 
     @Test
     public void parseConfigTest() throws Exception {
-        System.out.println(Helper.parseConfig());
+        System.out.println(Helper.getLinesFromConfiguration());
     }
 
-    @Test
-    public void getCurrentTimeStamp() throws Exception {
-        System.out.println(Helper.GetCurrentTimeStamp());
-    }
+
 
     @Test
     public void readConfigurationFile() throws Exception {
-        HashMap<Integer, GeneralNode> nodeHashMap =  Helper.readConfigurationFile();
+        HashMap<Integer, GeneralNode> nodeHashMap =  Helper.getNodesHashMap();
         assert nodeHashMap.size()== 5;
     }
 
     @Test
     public void getStartToken() throws Exception {
-        System.out.println(Helper.getStartToken(2));
+        System.out.println(Helper.getStartToken(0));
     }
 }

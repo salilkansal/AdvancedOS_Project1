@@ -28,9 +28,9 @@ cat ${CONFIG} | sed -e "s/#.*//" | sed -e "/^\s*$/d" |
 	for ((i=0;i<END;i++));
 	do
     	read line
-    	host=$( echo $line | awk '{ print $2 }' )
-        port=$( echo $line | awk '{ print $3 }' )
-        ssh -o StrictHostKeyChecking=no $netid@$host java $BINDIR/$PROG $i $port &
+    	host=$( echo ${line} | awk '{ print $2 }' )
+        port=$( echo ${line} | awk '{ print $3 }' )
+        ssh -o StrictHostKeyChecking=no ${netid}@${host} java ${BINDIR}/${PROG} ${i} ${port} &
 	done
    
 )
