@@ -1,5 +1,5 @@
 #
-# Configuration file for CS6378 Project 1
+# Configuration file for CS6378 com.skansal.Project 1
 #
 #
 # As per the "shell" convention, anything following a hash sign is
@@ -60,7 +60,7 @@
 
 
 
-# Token path for each node
+# com.skansal.model.Token path for each node
 # Format is:
 # Identifier      Nodes to be visited (excluding the two endpoints)
 	0				(1, 2, 3, 4)

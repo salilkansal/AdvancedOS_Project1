@@ -1,20 +1,26 @@
+package com.skansal.Util;
+
+import com.skansal.model.GeneralNode;
+import com.skansal.model.MyNode;
+import com.skansal.model.Token;
+
 import java.io.*;
 import java.util.*;
 
-class Helper {
+public class Helper {
 
     /**
      * It reads the configuration file and then builds hashMap of all the nodes
-     * This hashMap contains the key as the identifier and the General Node object as the value.
+     * This hashMap contains the key as the identifier and the General com.skansal.model.Node object as the value.
      * This object contains all the information about the other nodes like hostname, port no, identifier, isCompleted flag
      */
-    static HashMap<Integer, GeneralNode> getNodesHashMap() {
+    public static HashMap<Integer, GeneralNode> getNodesHashMap() {
 
         HashMap<Integer, GeneralNode> nodeHashMap = new HashMap<>();
         List<String> input = getLinesFromConfiguration();
 
         assert input != null;
-        int numberOfNodes = Integer.parseInt(input.get(0));
+        int numberOfNodes = Integer.parseInt(input.get(0).trim());
         for (int i = 1; i <= numberOfNodes; i++) {
             String line1 = input.get(i);
             Scanner scanner = new Scanner(line1);
@@ -31,17 +37,16 @@ class Helper {
     }
 
     /**
-     * Given a identifier it tells what is the Token object of that identifier
+     * Given a identifier it tells what is the com.skansal.model.Token object of that identifier
      * This is used by the object to actually send the first token and this creates the token object from the configuration file
      *
-     * @param identifier The identifier whose Token object is needed- 0
-     * @return The token object- Token{startIdentifier=0, path=[0, 1, 2, 3, 4, 0], sum=0}
+     * @param identifier The identifier whose com.skansal.model.Token object is needed- 0
+     * @return The token object- com.skansal.model.Token{startIdentifier=0, path=[0, 1, 2, 3, 4, 0], sum=0}
      */
-    static Token getStartToken(int identifier) {
+    public static Token getStartToken(int identifier) {
         List<String> input = getLinesFromConfiguration();
-
         assert input != null;
-        int numberOfNodes = Integer.parseInt(input.get(0));
+        int numberOfNodes = Integer.parseInt(input.get(0).trim());
         for (int i = numberOfNodes + 1; i <= 2 * numberOfNodes; i++) {
             String line1 = input.get(i);
             Scanner scanner = new Scanner(line1);
@@ -64,7 +69,7 @@ class Helper {
      *
      * @return List of lines which are not blank and not comments.
      */
-    static List<String> getLinesFromConfiguration() {
+    public static List<String> getLinesFromConfiguration() {
         FileInputStream fileInputStream;
         try {
             //noinspection ConstantConditions
@@ -77,7 +82,7 @@ class Helper {
         List<String> input = new LinkedList<>();
         while (scanner.hasNext()) {
             String line = scanner.nextLine();
-            if (line.isEmpty() || line.startsWith("#")) continue;
+            if (line.trim().isEmpty() || line.trim().startsWith("#")) continue;
             input.add(line);
         }
         return input;
@@ -90,7 +95,7 @@ class Helper {
      * @param path       the path in the format (1, 2, 3, 4)
      * @return The linked list path 0, 1, 2, 3, 4, 0
      */
-    static LinkedList<Integer> parsePath(Integer identifier, String path) {
+    public static LinkedList<Integer> parsePath(Integer identifier, String path) {
         LinkedList<Integer> pathList = new LinkedList<>();
         path = path.trim();
         path = path.substring(1, path.length() - 1);
@@ -110,7 +115,7 @@ class Helper {
      * @param nodeHashMap The hashmap of nodes which has all the data of the nodes.
      * @return true if all nodes are completed, false otherwise
      */
-    static boolean allNodesCompleted(HashMap<Integer, GeneralNode> nodeHashMap) {
+    public static boolean allNodesCompleted(HashMap<Integer, GeneralNode> nodeHashMap) {
         boolean allNodesCompleted;
         for (Map.Entry<Integer, GeneralNode> entry : nodeHashMap.entrySet()) {
             allNodesCompleted = entry.getValue().isCompleted;
@@ -127,17 +132,17 @@ class Helper {
      * @param identifier  The identifier of the node for which the flag is to be set
      * @param isCompleted The Flag value in boolean
      */
-    static void setIsCompleted(HashMap<Integer, GeneralNode> nodeHashMap, int identifier, boolean isCompleted) {
+    public static void setIsCompleted(HashMap<Integer, GeneralNode> nodeHashMap, int identifier, boolean isCompleted) {
         nodeHashMap.get(identifier).isCompleted |= isCompleted;
     }
 
 
     /**
      * This method writes the output file given a identifier and token
-     * @param myNode The Mynode object of the calling Node
+     * @param myNode The Mynode object of the calling com.skansal.model.Node
      * @param token The token that has been completed traversing through its path.
      */
-    static void writeOutputFile(MyNode myNode, Token token) {
+    public static void writeOutputFile(MyNode myNode, Token token) {
         File file = new File (ConfigParser.getStringValue("outputfilepath") + "output_" + String.format("%02d",myNode.identifier) + ".txt");
         //noinspection ResultOfMethodCallIgnored
         file.getParentFile().mkdirs();

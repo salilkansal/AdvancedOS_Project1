@@ -1,11 +1,15 @@
+package com.skansal.model;
+
+import com.skansal.Util.Helper;
+
 import java.io.*;
 import java.nio.ByteBuffer;
 import java.util.LinkedList;
 
-class Token implements Serializable {
+public class Token implements Serializable {
     private int startIdentifier;
-    LinkedList<Integer> path;
-    int sum;
+    public LinkedList<Integer> path;
+    public int sum;
 
     public Token(int startIdentifier, String path) {
         this.startIdentifier = startIdentifier;
@@ -13,18 +17,18 @@ class Token implements Serializable {
         this.sum = 0;
     }
 
-    boolean isLastNode() {
+    public boolean isLastNode() {
         return path.size() == 1;
     }
 
-    void processToken(MyNode node) {
+    public void processToken(MyNode node) {
         this.sum += node.label;
         this.path.removeFirst();
     }
 
     @Override
     public String toString() {
-        return "Token{" +
+        return "com.skansal.model.Token{" +
                 "startIdentifier=" + startIdentifier +
                 ", path=" + path +
                 ", sum=" + sum +
@@ -34,10 +38,10 @@ class Token implements Serializable {
     /**
      * Serializes the object into an array of bytes
      *
-     * @param token The input instance of the class Token
+     * @param token The input instance of the class com.skansal.model.Token
      * @return the byte[] array serialized of the input object
      */
-    static byte[] serialize(Token token) {
+    public static byte[] serialize(Token token) {
         try {
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);
@@ -53,9 +57,9 @@ class Token implements Serializable {
      * Deserializes the object from the Byte Buffer
      *
      * @param byteBuffer the bytebuffer which contains the object in serialized manner
-     * @return Token instance of the object in deserialized manner
+     * @return com.skansal.model.Token instance of the object in deserialized manner
      */
-    static Token deSerialize(ByteBuffer byteBuffer) {
+    public static Token deSerialize(ByteBuffer byteBuffer) {
         try {
             ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(byteBuffer.array());
             ObjectInputStream objectInputStream = new ObjectInputStream(byteArrayInputStream);

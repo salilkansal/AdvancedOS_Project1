@@ -1,3 +1,12 @@
+package com.skansal;
+
+import com.skansal.Util.ConfigParser;
+import com.skansal.Util.Helper;
+import com.skansal.model.GeneralNode;
+import com.skansal.thread.AcceptConnectionThread;
+import com.skansal.thread.SendFirstTokenThread;
+import com.skansal.model.MyNode;
+
 import java.util.HashMap;
 
 
@@ -13,10 +22,10 @@ class Project {
 
             //noinspection ConstantConditions
             Thread.sleep(Integer.parseInt(ConfigParser.getStringValue("sleep_time")));
-            // read config file and create HashMap<Identifier, GeneralNode>
+            // read config file and create HashMap<Identifier, com.skansal.model.GeneralNode>
             HashMap<Integer, GeneralNode> nodesHashMap = Helper.getNodesHashMap();
             //start the receiveToken thread
-            System.out.println(myNode.identifier + ": Node Starting");
+            System.out.println(myNode.identifier + ": com.skansal.model.Node Starting");
             //noinspection ConstantConditions
             Thread.sleep(Integer.parseInt(ConfigParser.getStringValue("sleep_time")));
             AcceptConnectionThread acceptConnectionThread = new AcceptConnectionThread(myNode, nodesHashMap);

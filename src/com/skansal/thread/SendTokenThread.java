@@ -1,5 +1,11 @@
+package com.skansal.thread;
+
+import com.skansal.Util.ConfigParser;
+import com.skansal.model.GeneralNode;
+import com.skansal.model.Token;
 import com.sun.nio.sctp.MessageInfo;
 import com.sun.nio.sctp.SctpChannel;
+import com.skansal.model.MyNode;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -8,23 +14,23 @@ import java.nio.ByteBuffer;
 import java.util.HashMap;
 
 /**
- * This is the client thread. It receives a Token and then send it to the destination node
+ * This is the client thread. It receives a com.skansal.model.Token and then send it to the destination node
  * The protocol is ass follows
  *
  * It first sends its own identifier value so receiving node knows from where it is receiving this token
  * Then it sends the isCompleted flag which states whether this is a termination message
  *
- * if the isCompleted flag is true then it does not need to send the Token
- * else the protocol states that Token is sent.
+ * if the isCompleted flag is true then it does not need to send the com.skansal.model.Token
+ * else the protocol states that com.skansal.model.Token is sent.
  */
-class SendTokenThread extends Thread {
+public class SendTokenThread extends Thread {
     private Token token;
     private HashMap<Integer, GeneralNode> nodeHashMap;
     private MyNode mynode;
     private boolean isCompleted;
 
     SendTokenThread(Token token, HashMap<Integer, GeneralNode> nodeHashMap, MyNode mynode, boolean isCompleted) {
-        super("SendTokenThread");
+        super("com.skansal.thread.SendTokenThread");
         this.token = token;
         this.nodeHashMap = nodeHashMap;
         this.mynode = mynode;
@@ -50,7 +56,7 @@ class SendTokenThread extends Thread {
             sendBoolean(sctpChannel, isCompleted);
 
             if (!isCompleted) {
-                //send Token if isCompleted is False
+                //send com.skansal.model.Token if isCompleted is False
                 sendToken(sctpChannel, token);
             }
             sctpChannel.close();

@@ -11,4 +11,3 @@ out
 gen
 .DS_Store
 .gitignore
-bin/

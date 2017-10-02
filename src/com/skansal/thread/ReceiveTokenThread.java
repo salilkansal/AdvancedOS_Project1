@@ -1,4 +1,11 @@
+package com.skansal.thread;
+
+import com.skansal.Util.ConfigParser;
+import com.skansal.model.GeneralNode;
+import com.skansal.Util.Helper;
+import com.skansal.model.Token;
 import com.sun.nio.sctp.SctpChannel;
+import com.skansal.model.MyNode;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -21,12 +28,12 @@ import java.util.HashMap;
  * Send the token object after processing it
  *
  */
-class ReceiveTokenThread extends Thread {
+public class ReceiveTokenThread extends Thread {
     private SctpChannel sctpChannel;
     private MyNode myNode;
     private HashMap<Integer, GeneralNode> nodeHashMap;
 
-    ReceiveTokenThread(SctpChannel sctpChannel, MyNode myNode, HashMap<Integer, GeneralNode> nodeHashMap) {
+    public ReceiveTokenThread(SctpChannel sctpChannel, MyNode myNode, HashMap<Integer, GeneralNode> nodeHashMap) {
         super("ReceiveAndProcessToken");
         this.sctpChannel = sctpChannel;
         this.myNode = myNode;
@@ -36,15 +43,15 @@ class ReceiveTokenThread extends Thread {
     @Override
     public void run() {
         try {
-            //System.out.println(myNode.identifier + ": Receiving Node");
+            //System.out.println(myNode.identifier + ": Receiving com.skansal.model.Node");
             //receive identifier
 
             int otherIdentifier = receiveInteger(sctpChannel);
-            //System.out.println(myNode.identifier + ": Receiving from Node " + otherIdentifier);
+            //System.out.println(myNode.identifier + ": Receiving from com.skansal.model.Node " + otherIdentifier);
 
             //receive completed or not completed
             boolean isCompleted = receiveBoolean(sctpChannel);
-            //System.out.println(myNode.identifier + ": Node " + otherIdentifier + " (isCompleted: " + isCompleted + ")");
+            //System.out.println(myNode.identifier + ": com.skansal.model.Node " + otherIdentifier + " (isCompleted: " + isCompleted + ")");
 
             Helper.setIsCompleted(nodeHashMap, otherIdentifier, isCompleted);
 

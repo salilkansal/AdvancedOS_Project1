@@ -1,12 +1,19 @@
+package com.skansal.thread;
+
+import com.skansal.model.GeneralNode;
+import com.skansal.Util.Helper;
+import com.skansal.model.Token;
+import com.skansal.model.MyNode;
+
 import java.util.HashMap;
 
-class ProcessTokenThread extends Thread {
+public class ProcessTokenThread extends Thread {
     private Token token;
     private MyNode myNode;
     private HashMap<Integer, GeneralNode> nodeHashMap;
 
     ProcessTokenThread(Token token, MyNode myNode, HashMap<Integer, GeneralNode> nodeHashMap) {
-        super("ProcessTokenThread");
+        super("com.skansal.thread.ProcessTokenThread");
         this.token = token;
         this.myNode = myNode;
         this.nodeHashMap = nodeHashMap;
@@ -15,7 +22,6 @@ class ProcessTokenThread extends Thread {
     @Override
     public void run() {
         super.run();
-        //System.out.println(myNode.identifier + ": Processing Token");
         if (token.isLastNode()) {
             //last node
 

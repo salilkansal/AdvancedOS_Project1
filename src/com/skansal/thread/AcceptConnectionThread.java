@@ -1,5 +1,9 @@
+package com.skansal.thread;
+
+import com.skansal.model.GeneralNode;
 import com.sun.nio.sctp.SctpChannel;
 import com.sun.nio.sctp.SctpServerChannel;
+import com.skansal.model.MyNode;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -19,7 +23,7 @@ import java.util.HashMap;
  * @author: salilkansal
  * Create Time: 9/25/16
  */
-class AcceptConnectionThread extends Thread {
+public class AcceptConnectionThread extends Thread {
 
     private MyNode myNode;
     private HashMap<Integer, GeneralNode> nodeHashMap;
@@ -40,7 +44,7 @@ class AcceptConnectionThread extends Thread {
 
             //start timer thread
             new CheckIfAllTerminatedThread(sctpServerChannel, nodeHashMap).start();
-            System.out.println(myNode.identifier + ": Waiting for Node to Connect");
+            System.out.println(myNode.identifier + ": Waiting for com.skansal.model.Node to Connect");
             try {
                 //noinspection InfiniteLoopStatement
                 while (true) {
@@ -59,33 +63,4 @@ class AcceptConnectionThread extends Thread {
     }
 }
 
-/**
- * This threads continously checks if all nodes are completed.
- * If all nodes are completed it closes the serverChannel.
- *
- */
-class CheckIfAllTerminatedThread extends Thread {
-    private SctpServerChannel sctpServerChannel;
-    private HashMap<Integer, GeneralNode> nodeHashMap;
-    private int pollingTime;
-    public CheckIfAllTerminatedThread(SctpServerChannel sctpServerChannel, HashMap<Integer, GeneralNode> nodeHashMap) {
-        this.sctpServerChannel = sctpServerChannel;
-        this.nodeHashMap = nodeHashMap;
-        //noinspection ConstantConditions
-        pollingTime = Integer.parseInt(ConfigParser.getStringValue("serversockettimeout"));
-    }
 
-    @Override
-    public void run() {
-        super.run();
-        //wait for some time and then check if all nodes are completed.
-        //if all are completed then close the serverChannel
-        try {
-            while (!Helper.allNodesCompleted(nodeHashMap))
-                Thread.sleep(pollingTime);
-            sctpServerChannel.close();
-        } catch (InterruptedException | IOException e) {
-            e.printStackTrace();
-        }
-    }
-}
